@@ -15,3 +15,8 @@ Créer les pages2
 
 # Etape 4
 Models
+
+# API
+liste des produits /produits
+details produit /produits/{id}
+liste categories /categories
