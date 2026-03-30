@@ -1,15 +1,9 @@
 export interface Produit {
   id: number;
-  nom: string;
-  slug: string;
+  title: string;
   description: string;
-  prix: number;
-  stock: number;
+  price: number;
   image?: string;
-  categorie: Categorie
+  categorie: string
 }
 
-export interface Categorie {
-  id: number;
-  nom: string;
-}

@@ -1,1 +1,19 @@
-<p>home-component works!</p>
+<h2 class="mb-2">Nos produits</h2>
+
+<div class="row g-4">
+  @for (item of produits; track item.id) {
+  <div class="col-lg-3 col-md-4 col-sm-12">
+    <div class="card h-100">
+      <img
+        [src]="item.image" [alt]="item.title"
+        style="height: 300px; object-fit: contain;">
+      <div class="card-body">
+        <div class="card-title"> {{ item.title | limite:30 }} </div>
+        <p class="card-text"> {{ item.price * 550 }} FCFA</p>
+        <a [routerLink]="['/produit', item.id]" class="btn btn-primary me-2">Voir</a>
+        <button class="btn btn-success">Ajouter au panier</button>
+      </div>
+    </div>
+  </div>
+  }
+</div>
