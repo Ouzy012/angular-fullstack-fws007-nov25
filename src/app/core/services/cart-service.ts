@@ -36,6 +36,8 @@ export class CartService {
     } else {
       this.listePaniers.update(items => [...items, { product: produit, quantity: 1 }]);
     }
+    console.log(items);
+
   }
 
   augmenterQuantite(productId: number): void {

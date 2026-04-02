@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CartService } from '../../../core/services/cart-service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,4 +8,6 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
-export class Navbar {}
+export class Navbar {
+  panierService = inject(CartService);
+}
