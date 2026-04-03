@@ -1,15 +1,15 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Products } from '../../../core/services/products';
 import { Produit } from '../../../models/produit.model';
 import { RouterLink } from "@angular/router";
-import { SlicePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { LimitePipe } from '../../../core/utils/limite-pipe';
 import { CartService } from '../../../core/services/cart-service';
 
 @Component({
   selector: 'app-home-component',
   standalone: true,
-  imports: [RouterLink, LimitePipe],
+  imports: [CommonModule, RouterLink, LimitePipe],
   templateUrl: './home-component.html',
   styleUrl: './home-component.css',
 })
@@ -17,27 +17,28 @@ export class HomeComponent implements OnInit{
   private productService = inject(Products);
   private panierService = inject(CartService);
 
-  produits: Produit[] = []
-  loading = false
+  produits = signal<Produit[]>([])
+  loading = signal(false)
 
-  ngOnInit() {
+  async ngOnInit() {
     console.log("executer");
+    console.log(this.produits());
     this.fetchProducts()
-    console.log(this.produits);
-
+    console.log(this.produits());
   }
 
 
   fetchProducts() {
-    this.loading = true
+    this.loading.set(true)
     this.productService.getProducts().subscribe({
       next: (data) => {
-        this.produits = data
-        this.loading = false
-        console.log(this.produits);
+        this.produits.set(data)
+        this.loading.set(false)
+
       },
-      error: err => {
-        this.loading = false;
+      error: (err) => {
+        this.produits.set([]);
+        this.loading.set(false);
         console.log(err);
       }
     })

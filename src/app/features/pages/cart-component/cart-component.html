@@ -1,1 +1,39 @@
-<p>cart-component works!</p>
+<h2>Mon panier</h2>
+<div class="row g-6">
+  @if (panierService.listePaniers().length === 0) {
+    <p>Votre panier est vide</p>
+  }@else {
+    @for (item of panierService.listePaniers(); track item.product.id) {
+      <div class="card">
+        <div class="card-body">
+          <h5> {{item.product.title}} </h5>
+          <p> Prix unitaire : {{ item.product.price * 550 }} FCFA </p>
+          <div>
+            @if (item.quantity > 1) {
+              <button
+              (click)="changerQuantiteMoins(item.product.id)">-</button>
+            }@else {
+              <button disabled>-</button>
+            }
+            <input
+              type="number" min="1"
+              [ngModel]="item.quantity"
+              >
+            <button (click)="changerQuantitePlus(item.product.id)">+</button>
+          </div>
+          <p>
+            Sous-total :
+            <strong>
+              {{item.product.price * 550 * item.quantity}} FCFA
+            </strong>
+          </p>
+          <button class="btn btn-danger" (click)="panierService.supprimerProduit(item.product.id)">
+            Supprimer
+          </button>
+        </div>
+      </div>
+    }
+
+    <h4>Total : {{panierService.totalProduit()}} FCFA </h4>
+  }
+</div>

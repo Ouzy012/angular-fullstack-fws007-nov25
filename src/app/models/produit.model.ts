@@ -10,5 +10,7 @@ export interface Produit {
     name: string;
     image: string;
     slug: string;
+    creationAt: string;
+    updatedAt: string;
   };
 }

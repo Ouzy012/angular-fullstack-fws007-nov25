@@ -14,9 +14,11 @@
           <a class="nav-link" href="#">Se connecter</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" routerLink="/panier">
             Panier
-            <!-- <span class="badge text-bg-secondary">{{panierService.quantiteTotal()}}</span> -->
+            @if (panierService.quantiteTotal() > 0) {
+              <span class="badge text-bg-secondary">{{panierService.quantiteTotal()}}</span>
+            }
           </a>
         </li>
         <!-- <li class="nav-item">
